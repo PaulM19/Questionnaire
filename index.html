@@ -2,93 +2,85 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donnez votre avis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Votre avis compte !</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f6fa;
+      background-color: #f4f6f9;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
     }
+
     .container {
-      background: white;
+      background-color: #fff;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       text-align: center;
-      width: 90%;
       max-width: 400px;
+      width: 90%;
     }
-    h1 {
+
+    h2 {
       color: #003580;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
+
+    p {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+
     .stars {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
       font-size: 2em;
+      color: #FFD700;
       cursor: pointer;
       margin-bottom: 10px;
     }
-    .stars span:hover,
-    .stars span.active {
-      color: gold;
+
+    .note {
+      font-size: 0.8em;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.4;
     }
-    p {
-      font-size: 0.95em;
-      color: #555;
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #003580;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s;
     }
-    .conditions {
-      font-size: 0.75em;
-      color: #888;
-      margin-top: 20px;
+
+    .btn:hover {
+      background-color: #002a66;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Comment évalueriez-vous votre séjour ?</h1>
-    <div class="stars" id="stars">
-      <span data-value="1">⭐</span>
-      <span data-value="2">⭐</span>
-      <span data-value="3">⭐</span>
-      <span data-value="4">⭐</span>
-      <span data-value="5">⭐</span>
+    <h2>Merci pour votre séjour !</h2>
+    <p>Donnez-nous votre avis</p>
+
+    <div class="stars">★ ★ ★ ★ ★</div>
+
+    <div class="note">
+      ➝ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
+      ➝ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
     </div>
-    <p>Nous vous remercions pour votre retour !</p>
-    <div class="conditions">
-      Merci pour votre séjour ! Donnez-nous votre avis ici :<br>
-      ➔ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
-      ➔ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
-    </div>
+
+    <a href="https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14" target="_blank" class="btn">
+      ✨ Laisser un avis sur Google
+    </a>
   </div>
-
-  <script>
-    const stars = document.querySelectorAll('#stars span');
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        const note = parseInt(star.getAttribute('data-value'));
-
-        // Highlight selected stars
-        stars.forEach(s => s.classList.remove('active'));
-        for (let i = 0; i < note; i++) {
-          stars[i].classList.add('active');
-        }
-
-        // Redirection
-        if (note >= 4) {
-          // Lien vers les avis Google du lieu correspondant
-          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
-        } else {
-          window.location.href = "https://tonhotel.com/contact"; // Formulaire interne ou Typeform
-        }
-      });
-    });
-  </script>
 </body>
 </html>
