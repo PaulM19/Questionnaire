@@ -60,11 +60,11 @@
       <span data-value="4">⭐</span>
       <span data-value="5">⭐</span>
     </div>
-    <p>Merci pour votre séjour ! Donnez-nous votre avis ici :</p>
+    <p>Nous vous remercions pour votre retour !</p>
     <div class="conditions">
-      
+      Merci pour votre séjour ! Donnez-nous votre avis ici :<br>
       ➔ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
-      ➔ Si vous êtes moins satisfaits, partagez nous vos remarques.
+      ➔ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
     </div>
   </div>
 
@@ -82,12 +82,10 @@
 
         // Redirection
         if (note >= 4) {
-          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJveQO_p6M-EcR27LlNEUrG6E"; // Lien vers Google, Booking, etc.
+          // Lien vers les avis Google du lieu correspondant
+          window.location.href = "https://www.google.com/maps/place/?q=place_id:ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
         } else {
           window.location.href = "https://tonhotel.com/contact"; // Formulaire interne ou Typeform
-          responseContainer.innerHTML = `
-         
-           
         }
       });
     });
