@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donnez votre avis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    h1 {
+      color: #003580;
+      margin-bottom: 20px;
+    }
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: 2em;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .stars span:hover,
+    .stars span.active {
+      color: gold;
+    }
+    p {
+      font-size: 0.95em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Comment évalueriez-vous votre séjour ?</h1>
+    <div class="stars" id="stars">
+      <span data-value="1">⭐</span>
+      <span data-value="2">⭐</span>
+      <span data-value="3">⭐</span>
+      <span data-value="4">⭐</span>
+      <span data-value="5">⭐</span>
+    </div>
+    <p>Nous vous remercions pour votre retour !</p>
+  </div>
+
+  <script>
+    const stars = document.querySelectorAll('#stars span');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const note = parseInt(star.getAttribute('data-value'));
+
+        // Highlight selected stars
+        stars.forEach(s => s.classList.remove('active'));
+        for (let i = 0; i < note; i++) {
+          stars[i].classList.add('active');
+        }
+
+        // Redirection
+        if (note >= 4) {
+          window.location.href = "https://g.page/r/avis-tonhotel"; // Lien vers Google, Booking, etc.
+        } else {
+          window.location.href = "https://tonhotel.com/contact"; // Formulaire interne ou Typeform
+        }
+      });
+    });
+  </script>
+</body>
+</html>
