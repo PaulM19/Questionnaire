@@ -7,60 +7,68 @@
   <style>
     :root {
       --novotel-blue: #003580;
+      --light-bg: #f4f6f9;
+      --white: #ffffff;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f4fb;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--light-bg);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
     }
 
-    .container {
-      background-color: #fff;
-      padding: 20px 20px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    .card {
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 30px 24px;
       max-width: 420px;
       width: 100%;
-      position: relative;
       box-sizing: border-box;
+      text-align: center;
+      position: relative;
     }
 
-    .logo {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      height: 55px;
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-wrapper img {
+      height: 60px;
       width: auto;
     }
 
     h2 {
       color: var(--novotel-blue);
-      margin: 70px 0 10px;
-      font-size: 1.5em;
+      font-size: 1.4em;
+      margin-bottom: 8px;
     }
 
     p {
-      color: var(--novotel-blue);
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-size: 1.1em;
+      color: #444;
+      font-size: 1em;
+      margin-bottom: 24px;
     }
 
     .stars {
-      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     .stars span {
       font-size: 2.3em;
       color: #ccc;
       cursor: pointer;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     .stars span.hover,
@@ -69,26 +77,23 @@
     }
 
     .note {
-      font-size: 0.95em;
-      color: #444;
-      margin-top: 25px;
+      font-size: 0.8em;
+      color: #555;
       line-height: 1.5;
+      margin-top: 10px;
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 15px 15px 25px;
+      .card {
+        padding: 24px 16px;
       }
 
-      .logo {
-        height: 45px;
-        top: 10px;
-        right: 10px;
+      .logo-wrapper img {
+        height: 50px;
       }
 
       h2 {
-        margin-top: 65px;
-        font-size: 1.3em;
+        font-size: 1.25em;
       }
 
       .stars span {
@@ -98,8 +103,10 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <img class="logo" src="Screenshot 2025-07-18 at 15.49.32.png" alt="Novotel Ibis Logo">
+  <div class="card">
+    <div class="logo-wrapper">
+      <img src="Screenshot 2025-07-18 at 15.49.32.png" alt="Logo Novotel Ibis">
+    </div>
 
     <h2>Merci pour votre séjour !</h2>
     <p>Donnez-nous votre avis</p>
@@ -113,8 +120,8 @@
     </div>
 
     <div class="note">
-      ➔ Si vous êtes satisfaits (4★ ou 5★), vous serez redirigé vers Google.<br>
-      ➔ Si vous avez des remarques (1★ à 3★), vous pourrez nous les transmettre directement.
+      Si votre expérience a été positive (4★ ou 5★), vous serez invité à partager un avis public sur Google.<br>
+      Si vous avez rencontré un souci (1★ à 3★), n'hésitez pas à nous en faire part directement.
     </div>
   </div>
 
