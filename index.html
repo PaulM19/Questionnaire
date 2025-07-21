@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f4fb;
+      background-color: #f4f6f9;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,9 +18,9 @@
       background-color: #fff;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       text-align: center;
-      max-width: 420px;
+      max-width: 400px;
       width: 90%;
     }
     h2 {
@@ -28,44 +28,56 @@
       margin-bottom: 10px;
     }
     p {
-      color: #003580;
-      font-weight: bold;
+      color: #333;
       margin-bottom: 20px;
+      font-size: 1em;
     }
     .note {
-      font-size: 0.85em;
-      color: #444;
-      margin-top: 25px;
-      line-height: 1.5;
+      font-size: 0.75em;
+      color: #888;
+      margin-top: 10px;
+      line-height: 1.4;
     }
     .stars span {
-      font-size: 2.2em;
+      font-size: 2em;
       color: #ccc;
       cursor: pointer;
-      transition: color 0.3s;
     }
     .stars span.hover,
     .stars span.selected {
-      color: #003580;
+      color: #FFD700;
     }
-    .logos {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
+    .form-container {
+      display: none;
+      margin-top: 20px;
     }
-    .logos img {
-      height: 60px;
-      margin: 0 10px;
+    .form-container.active {
+      display: block;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 0.9em;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #003580;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #002a66;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="logos">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Novotel_2015_logo.svg" alt="Novotel" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ibis_Styles_Logo_2012.svg/512px-Ibis_Styles_Logo_2012.svg.png" alt="ibis Styles" />
-    </div>
-
     <h2>Merci pour votre séjour !</h2>
     <p>Donnez-nous votre avis</p>
 
@@ -78,40 +90,22 @@
     </div>
 
     <div class="note">
-      ➔ Si vous êtes satisfaits (4★ ou 5★), vous serez redirigé vers Google.<br>
-      ➔ Si vous avez des remarques (1★ à 3★), vous pourrez nous les transmettre directement.
+      ➝ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
+      ➝ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
+    </div>
+
+    <div class="form-container" id="feedbackFormContainer">
+      <input type="text" placeholder="Nom (facultatif)">
+      <input type="email" placeholder="Email (si vous souhaitez une réponse)">
+      <textarea rows="4" placeholder="Expliquez-nous votre retour..."></textarea>
+      <button onclick="submitFeedback()">Envoyer</button>
     </div>
   </div>
 
   <script>
     const stars = document.querySelectorAll('#stars span');
+    const feedbackFormContainer = document.getElementById('feedbackFormContainer');
     let selectedRating = 0;
-
-    stars.forEach(star => {
-      star.addEventListener('mouseover', () => {
-        resetStars();
-        highlightStars(star.dataset.value);
-      });
-
-      star.addEventListener('click', () => {
-        selectedRating = parseInt(star.dataset.value);
-        resetStars();
-        highlightStars(selectedRating);
-
-        if (selectedRating >= 4) {
-          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
-        } else {
-          window.location.href = "feedback.html";
-        }
-      });
-
-      star.addEventListener('mouseout', () => {
-        resetStars();
-        if (selectedRating > 0) {
-          highlightStars(selectedRating);
-        }
-      });
-    });
 
     function resetStars() {
       stars.forEach(s => s.classList.remove('hover', 'selected'));
@@ -123,6 +117,37 @@
           s.classList.add('hover');
         }
       });
+    }
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        resetStars();
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener('mouseout', () => {
+        resetStars();
+        if (selectedRating > 0) {
+          highlightStars(selectedRating);
+        }
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.value);
+        resetStars();
+        highlightStars(selectedRating);
+
+        if (selectedRating >= 4) {
+          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
+        } else {
+          feedbackFormContainer.classList.add('active');
+        }
+      });
+    });
+
+    function submitFeedback() {
+      alert("Merci pour votre retour. Il a bien été enregistré.");
+      location.reload();
     }
   </script>
 </body>
