@@ -7,7 +7,7 @@
   <style>
     :root {
       --novotel-blue: #003580;
-      --light-bg: #f4f6f9;
+      --light-bg: #f0f4fb;
       --white: #ffffff;
     }
 
@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      background-color: var(--light-bg);
+      background: linear-gradient(to bottom, var(--light-bg), #ffffff 80%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -25,7 +25,7 @@
     .card {
       background-color: var(--white);
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       padding: 30px 24px;
       max-width: 420px;
       width: 100%;
@@ -37,12 +37,13 @@
     .logo-wrapper {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .logo-wrapper img {
       height: 60px;
       width: auto;
+      max-width: 100px;
     }
 
     h2 {
@@ -61,7 +62,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .stars span {
@@ -76,11 +77,39 @@
       color: var(--novotel-blue);
     }
 
+    hr {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 20px 0;
+    }
+
+    #selected-rating {
+      margin-top: 5px;
+      font-size: 0.85em;
+      color: #333;
+    }
+
+    .cta-button {
+      background-color: var(--novotel-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1em;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #00265e;
+    }
+
     .note {
       font-size: 0.8em;
       color: #555;
       line-height: 1.5;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
     @media (max-width: 480px) {
@@ -105,7 +134,7 @@
 <body>
   <div class="card">
     <div class="logo-wrapper">
-      <img src="Screenshot 2025-07-18 at 15.49.32.png" alt="Logo Novotel Ibis">
+      <img src="Screenshot 2025-07-18 at 15.49.32.png" alt="Logo Novotel Ibis" />
     </div>
 
     <h2>Merci pour votre séjour !</h2>
@@ -119,6 +148,12 @@
       <span data-value="5">&#9733;</span>
     </div>
 
+    <div id="selected-rating"></div>
+
+    <hr />
+
+    <button class="cta-button" onclick="submitRating()">Continuer</button>
+
     <div class="note">
       Si votre expérience a été positive (4★ ou 5★), vous serez invité à partager un avis public sur Google.<br>
       Si vous avez rencontré un souci (1★ à 3★), n'hésitez pas à nous en faire part directement.
@@ -127,6 +162,7 @@
 
   <script>
     const stars = document.querySelectorAll('#stars span');
+    const selectedRatingDisplay = document.getElementById('selected-rating');
     let selectedRating = 0;
 
     stars.forEach(star => {
@@ -139,12 +175,7 @@
         selectedRating = parseInt(star.dataset.value);
         resetStars();
         highlightStars(selectedRating);
-
-        if (selectedRating >= 4) {
-          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
-        } else {
-          window.location.href = "feedback.html";
-        }
+        selectedRatingDisplay.innerText = `Vous avez donné ${selectedRating} ★`;
       });
 
       star.addEventListener('mouseout', () => {
@@ -165,6 +196,19 @@
           s.classList.add('hover');
         }
       });
+    }
+
+    function submitRating() {
+      if (selectedRating === 0) {
+        alert("Veuillez sélectionner une note avant de continuer.");
+        return;
+      }
+
+      if (selectedRating >= 4) {
+        window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
+      } else {
+        window.location.href = "feedback.html";
+      }
     }
   </script>
 </body>
