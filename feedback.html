@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votre retour</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+    }
+    h2 {
+      color: #003580;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+      resize: none;
+    }
+    button {
+      background-color: #003580;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00265e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Nous sommes désolés d’apprendre cela</h2>
+    <p>Votre retour est précieux pour nous améliorer.</p>
+    <form action="mailto:direction@novoteldakar.com" method="POST" enctype="text/plain">
+      <textarea name="message" placeholder="Décrivez-nous votre expérience..."></textarea>
+      <br />
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+</body>
+</html>
