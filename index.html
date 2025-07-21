@@ -14,7 +14,6 @@
       align-items: center;
       min-height: 100vh;
     }
-
     .container {
       background-color: #fff;
       padding: 30px;
@@ -24,45 +23,29 @@
       max-width: 400px;
       width: 90%;
     }
-
     h2 {
       color: #003580;
       margin-bottom: 10px;
     }
-
     p {
       color: #333;
       margin-bottom: 20px;
       font-size: 1em;
     }
-
-    .stars {
-      font-size: 2em;
-      color: #FFD700;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-
     .note {
       font-size: 0.8em;
       color: #666;
       margin-bottom: 20px;
       line-height: 1.4;
     }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      background-color: #003580;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 8px;
-      transition: background-color 0.3s;
+    .stars span {
+      font-size: 2em;
+      color: #ccc;
+      cursor: pointer;
     }
-
-    .btn:hover {
-      background-color: #002a66;
+    .stars span.hover,
+    .stars span.selected {
+      color: #FFD700;
     }
   </style>
 </head>
@@ -71,17 +54,61 @@
     <h2>Merci pour votre séjour !</h2>
     <p>Donnez-nous votre avis</p>
 
-    <div class="stars">★ ★ ★ ★ ★</div>
-
-    <div class="note">
-      ➝ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
-      ➝ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
+    <div class="stars" id="stars">
+      <span data-value="1">&#9733;</span>
+      <span data-value="2">&#9733;</span>
+      <span data-value="3">&#9733;</span>
+      <span data-value="4">&#9733;</span>
+      <span data-value="5">&#9733;</span>
     </div>
 
-    <a href="https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14" target="_blank" class="btn">
-      ✨ Laisser un avis sur Google
-    </a>
+    <div class="note">
+      ➔ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
+      ➔ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
+    </div>
   </div>
+
+  <script>
+    const stars = document.querySelectorAll('#stars span');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        resetStars();
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.value);
+        resetStars();
+        highlightStars(selectedRating);
+
+        if (selectedRating >= 4) {
+          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
+        } else {
+          window.location.href = "mailto:direction@novoteldakar.com?subject=Remarques%20client&body=Bonjour,%20je%20souhaite%20partager%20mon%20avis%20suite%20%C3%A0%20mon%20s%C3%A9jour...";
+        }
+      });
+
+      star.addEventListener('mouseout', () => {
+        resetStars();
+        if (selectedRating > 0) {
+          highlightStars(selectedRating);
+        }
+      });
+    });
+
+    function resetStars() {
+      stars.forEach(s => s.classList.remove('hover', 'selected'));
+    }
+
+    function highlightStars(limit) {
+      stars.forEach(s => {
+        if (parseInt(s.dataset.value) <= limit) {
+          s.classList.add('hover');
+        }
+      });
+    }
+  </script>
 </body>
 </html>
-
