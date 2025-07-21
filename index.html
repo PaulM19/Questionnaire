@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
+      background-color: #f0f4fb;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,9 +18,9 @@
       background-color: #fff;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       text-align: center;
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
     }
     h2 {
@@ -28,29 +28,44 @@
       margin-bottom: 10px;
     }
     p {
-      color: #333;
+      color: #003580;
+      font-weight: bold;
       margin-bottom: 20px;
-      font-size: 1em;
     }
     .note {
-      font-size: 0.8em;
-      color: #666;
-      margin-bottom: 20px;
-      line-height: 1.4;
+      font-size: 0.85em;
+      color: #444;
+      margin-top: 25px;
+      line-height: 1.5;
     }
     .stars span {
-      font-size: 2em;
+      font-size: 2.2em;
       color: #ccc;
       cursor: pointer;
+      transition: color 0.3s;
     }
     .stars span.hover,
     .stars span.selected {
-      color: #FFD700;
+      color: #003580;
+    }
+    .logos {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logos img {
+      height: 60px;
+      margin: 0 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Novotel_2015_logo.svg" alt="Novotel" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ibis_Styles_Logo_2012.svg/512px-Ibis_Styles_Logo_2012.svg.png" alt="ibis Styles" />
+    </div>
+
     <h2>Merci pour votre séjour !</h2>
     <p>Donnez-nous votre avis</p>
 
@@ -63,8 +78,8 @@
     </div>
 
     <div class="note">
-      ➔ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
-      ➔ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
+      ➔ Si vous êtes satisfaits (4★ ou 5★), vous serez redirigé vers Google.<br>
+      ➔ Si vous avez des remarques (1★ à 3★), vous pourrez nous les transmettre directement.
     </div>
   </div>
 
@@ -86,7 +101,7 @@
         if (selectedRating >= 4) {
           window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
         } else {
-          window.location.href = "mailto:direction@novoteldakar.com?subject=Remarques%20client&body=Bonjour,%20je%20souhaite%20partager%20mon%20avis%20suite%20%C3%A0%20mon%20s%C3%A9jour...";
+          window.location.href = "feedback.html";
         }
       });
 
