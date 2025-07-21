@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
+      background-color: #f0f4fb;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,66 +18,49 @@
       background-color: #fff;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       text-align: center;
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
+      position: relative;
     }
     h2 {
       color: #003580;
       margin-bottom: 10px;
     }
     p {
-      color: #333;
+      color: #003580;
+      font-weight: bold;
       margin-bottom: 20px;
-      font-size: 1em;
     }
     .note {
-      font-size: 0.75em;
-      color: #888;
-      margin-top: 10px;
-      line-height: 1.4;
+      font-size: 0.55em;
+      color: #444;
+      margin-top: 25px;
+      line-height: 1.5;
     }
     .stars span {
-      font-size: 2em;
+      font-size: 2.2em;
       color: #ccc;
       cursor: pointer;
+      transition: color 0.3s;
     }
     .stars span.hover,
     .stars span.selected {
-      color: #FFD700;
+      color: #003580;
     }
-    .form-container {
-      display: none;
-      margin-top: 20px;
-    }
-    .form-container.active {
-      display: block;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 0.9em;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #003580;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #002a66;
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 60px;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <img class="logo" src="Screenshot 2025-07-18 at 15.49.32.png" alt="Novotel Ibis Logo">
+
     <h2>Merci pour votre séjour !</h2>
     <p>Donnez-nous votre avis</p>
 
@@ -90,22 +73,40 @@
     </div>
 
     <div class="note">
-      ➝ Si vous êtes satisfaits, vous serez redirigé vers Google pour nous aider à mieux rayonner.<br>
-      ➝ Si vous êtes moins satisfaits, vous pouvez directement nous partager vos remarques.
-    </div>
-
-    <div class="form-container" id="feedbackFormContainer">
-      <input type="text" placeholder="Nom (facultatif)">
-      <input type="email" placeholder="Email (si vous souhaitez une réponse)">
-      <textarea rows="4" placeholder="Expliquez-nous votre retour..."></textarea>
-      <button onclick="submitFeedback()">Envoyer</button>
+      ➔ Si vous êtes satisfaits (4★ ou 5★), vous serez redirigé vers Google.<br>
+      ➔ Si vous avez des remarques (1★ à 3★), vous pourrez nous les transmettre directement.
     </div>
   </div>
 
   <script>
     const stars = document.querySelectorAll('#stars span');
-    const feedbackFormContainer = document.getElementById('feedbackFormContainer');
     let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        resetStars();
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.value);
+        resetStars();
+        highlightStars(selectedRating);
+
+        if (selectedRating >= 4) {
+          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
+        } else {
+          window.location.href = "feedback.html";
+        }
+      });
+
+      star.addEventListener('mouseout', () => {
+        resetStars();
+        if (selectedRating > 0) {
+          highlightStars(selectedRating);
+        }
+      });
+    });
 
     function resetStars() {
       stars.forEach(s => s.classList.remove('hover', 'selected'));
@@ -117,37 +118,6 @@
           s.classList.add('hover');
         }
       });
-    }
-
-    stars.forEach(star => {
-      star.addEventListener('mouseover', () => {
-        resetStars();
-        highlightStars(star.dataset.value);
-      });
-
-      star.addEventListener('mouseout', () => {
-        resetStars();
-        if (selectedRating > 0) {
-          highlightStars(selectedRating);
-        }
-      });
-
-      star.addEventListener('click', () => {
-        selectedRating = parseInt(star.dataset.value);
-        resetStars();
-        highlightStars(selectedRating);
-
-        if (selectedRating >= 4) {
-          window.location.href = "https://search.google.com/local/writereview?placeid=ChIJ-7AaD7RzwQ4RVhRJcxdtG14";
-        } else {
-          feedbackFormContainer.classList.add('active');
-        }
-      });
-    });
-
-    function submitFeedback() {
-      alert("Merci pour votre retour. Il a bien été enregistré.");
-      location.reload();
     }
   </script>
 </body>
